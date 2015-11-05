@@ -13,8 +13,5 @@ class ActionHander extends EventHandler[ActionEvent] with MongoRunner with SQLRu
    
   override def handle(event : ActionEvent) {
      insertSQL("insert into employee values(0,'ricky','luu','user3','pass')")
-   }
-  
-  
-  
+   } 
 }

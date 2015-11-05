@@ -8,11 +8,9 @@ trait SQImpl {
   
   val statement = new DataConfig ().dataSource().getConnection.createStatement()
   
-  def findAll(obj : Any) : ArrayList
+  def findAll(statement : String) : ArrayList
   def insert(statement : String)
   def update(statement : String)
   def delete(statement : String)
-    
-  
-  
+ 
 }

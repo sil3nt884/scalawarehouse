@@ -16,5 +16,5 @@ trait Mongoimpl {
     def insert(obj :Any) 
     def findAll(ojb : Any) : ArrayList
     def delete(id : Integer)
-    def update(id: Integer)
+    def update(id: Integer, collection : Any, feild : String)
 }

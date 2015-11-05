@@ -1,9 +1,12 @@
 
 
-package com.QA.entities/**
+package com.QA.entities
+
+
+/**
  * @author rluu
  */
-class Product(id: Integer , name : String , price : Integer) {
+class Product(id: Integer , name : String , price : Integer) extends Entity {
   
 
   
@@ -20,5 +23,8 @@ class Product(id: Integer , name : String , price : Integer) {
   def getPrice(): Integer ={
     price
   }
+ 
+
   
+
 }

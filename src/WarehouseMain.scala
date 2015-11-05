@@ -23,18 +23,12 @@ class WarehouseMain extends Application {
     val root = new StackPane
     Stage setScene(new Scene(root, 300, 300))
     Stage show()
-    val  mongo = new MongoRunner().update(1, new Product(), "Name","product1")
+   
    
   }
     
  
   
-  
-
-
-  
- 
- 
 
 }
 

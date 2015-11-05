@@ -23,6 +23,7 @@ class MongoRunner extends Mongoimpl {
     val test = mongo.getCollection(obj.getClass().getSimpleName).find()
     test.forEach(new Block[Document]() {
       override def apply(document: Document) {
+        println(document)
         list.add(document)
       }
     })
@@ -42,7 +43,7 @@ class MongoRunner extends Mongoimpl {
 
   }
 
-  def update(id: Integer, obj: Any, feild: String) {
+  def update(id: Integer, obj: Any, feild: String, value : String) {
     val list = findAll(obj)
     var ids : Int = 0 
     breakable {
@@ -59,8 +60,9 @@ class MongoRunner extends Mongoimpl {
       }
       
     }
- 
-    //val test = mongo.getCollection(obj.getClass().getSimpleName).updateOne(new Document(), )
+    val where = new Document("ID", ids)
+    val set = new Document("$set", new Document(feild,value))
+    val test = mongo.getCollection(obj.getClass().getSimpleName).updateMany(where, set)
   }
 
   def delete(id: Integer) {

@@ -16,7 +16,7 @@ import com.QA.entities.Entity
 /**
  * @author rluu
  */
-class MongoRunner extends Mongoimpl {
+trait MongoRunner extends Mongoimpl {
 
   def findAll(obj: Any): ArrayList = {
     val list = new ArrayList()
@@ -29,6 +29,10 @@ class MongoRunner extends Mongoimpl {
     })
     list
   }
+  
+  /**
+   * 
+   */
 
   def insert(obj: Any) {
     val map = new HashMap[String, Object];

@@ -4,9 +4,9 @@ import com.QA.util.ArrayList
 /**
  * @author rluu
  */
-trait SQImpl {
+trait SQLImpl {
   
-  val statement = new DataConfig ().dataSource().getConnection.createStatement()
+  val statement = new DataConfig ().dataSource().getConnection
   
   def findAllSQL(statement : String) : ArrayList
   def insertSQL(statement : String)

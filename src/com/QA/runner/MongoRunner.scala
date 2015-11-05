@@ -62,7 +62,7 @@ class MongoRunner extends Mongoimpl {
     }
     val where = new Document("ID", ids)
     val set = new Document("$set", new Document(feild,value))
-    val test = mongo.getCollection(obj.getClass().getSimpleName).updateMany(where, set)
+    val excute = mongo.getCollection(obj.getClass().getSimpleName).updateMany(where, set)
   }
 
   def delete(id: Integer) {

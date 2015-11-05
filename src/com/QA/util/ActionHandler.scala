@@ -6,11 +6,13 @@ import com.QA.runner.SQLRunner
 
 /**
  * @author rluu
+ * ActionHandler a class
+ * handles Actions extends runners
  */
 class ActionHander extends EventHandler[ActionEvent] with MongoRunner with SQLRunner{
    
   override def handle(event : ActionEvent) {
-      println(event.getSource)
+      
    }
   
   

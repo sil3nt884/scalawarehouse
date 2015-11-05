@@ -17,6 +17,10 @@ import com.QA.entities.Entity
  * @author rluu
  */
 trait MongoRunner extends Mongoimpl {
+  
+  /**
+   * Finds everything from one collection
+   */
 
   def findAll(obj: Any): ArrayList = {
     val list = new ArrayList()
@@ -31,7 +35,10 @@ trait MongoRunner extends Mongoimpl {
   }
   
   /**
-   * 
+   * Takes in an entity and then gets the 
+   * feilds of the field and adds them
+   * into the mongo Database
+   *  
    */
 
   def insert(obj: Any) {
@@ -46,6 +53,10 @@ trait MongoRunner extends Mongoimpl {
     mongo.getCollection(obj.getClass().getSimpleName).insertOne(new Document(map2))
 
   }
+  
+  /**
+   * Updates the mongo Database  via feild 
+   */
 
   def update(id: Integer, obj: Any, feild: String, value : String) {
     val list = findAll(obj)

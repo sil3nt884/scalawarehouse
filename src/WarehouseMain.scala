@@ -28,13 +28,7 @@ class WarehouseMain extends Application {
     root.getChildren.add(button)
     Stage setScene(new Scene(root, 300, 300))
     Stage show()
-   
-   
   }
-    
- 
-  
-
 }
 
 object WarehouseMain extends App {

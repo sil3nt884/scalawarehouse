@@ -12,7 +12,7 @@ import com.QA.runner.SQLRunner
 class ActionHander extends EventHandler[ActionEvent] with MongoRunner with SQLRunner{
    
   override def handle(event : ActionEvent) {
-      
+     insertSQL("insert into employee values(0,'ricky','luu','user3','pass')")
    }
   
   

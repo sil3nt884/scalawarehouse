@@ -5,6 +5,9 @@ package com.QA.util
  */
 class MethodThread (callback: () => Unit )extends Thread{
   
+
+    
+
   
   override def run(){
      callback ()

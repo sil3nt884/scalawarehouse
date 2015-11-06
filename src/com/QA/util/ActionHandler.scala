@@ -4,26 +4,15 @@ import javafx.event._
 import com.QA.runner.MongoRunner
 import com.QA.runner.SQLRunner
 import javafx.scene.control._
-
+import java.sql.ResultSet
 /**
  * @author rluu
  * ActionHandler a class
  * handles Actions extends runners
  */
-class ActionHander extends EventHandler[ActionEvent] with MongoRunner with SQLRunner{
-   
-  override def handle(event : ActionEvent) {
-     event.getSource match{
-       case button : Button =>
-           if(button.getText.equalsIgnoreCase("Login")){
-               new MethodThread(doLogin).start()
-           }
-       case _ =>
-     }
-   } 
-  def doLogin () {
+trait ActionHander extends EventHandler[ActionEvent] with MongoRunner with SQLRunner {
 
-  }
+  def handle(event: ActionEvent)
   
-}
 
+}

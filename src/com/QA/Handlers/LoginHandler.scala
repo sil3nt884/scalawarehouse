@@ -9,8 +9,7 @@ import com.QA.util.MethodThread
  * @author rluu
  */
 class LoginHandler(user : TextField ,  pass :TextField ) extends ActionHander {
- 
-
+  
  def handle(event: ActionEvent) {
     event.getSource match {
       case button: Button =>
@@ -21,7 +20,6 @@ class LoginHandler(user : TextField ,  pass :TextField ) extends ActionHander {
     }
 
   }
-
   def doLogin() {
     val rs = findAllSQL("Select * from employee")
     checkDatabase(rs.next(), rs, user.getText, pass.getText)

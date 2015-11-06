@@ -5,6 +5,7 @@ package com.QA.entities
  */
 class Inventory (productid : Integer,  employeeid : Integer ,  quantity : Integer , location : String ) {
   
+  
  
   
 }

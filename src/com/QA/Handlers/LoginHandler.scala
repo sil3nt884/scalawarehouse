@@ -9,15 +9,12 @@ import com.QA.util.MethodThread
  * @author rluu
  */
 class LoginHandler(user : TextField ,  pass :TextField ) extends ActionHander {
-  var username : String =_
-  var password : String =_
+ 
 
  def handle(event: ActionEvent) {
     event.getSource match {
       case button: Button =>
         if (button.getText.equalsIgnoreCase("Login")) {
-            username=user.getText;
-            password=pass.getText
             new MethodThread(doLogin).start()
         }
       case _ =>
@@ -27,7 +24,7 @@ class LoginHandler(user : TextField ,  pass :TextField ) extends ActionHander {
 
   def doLogin() {
     val rs = findAllSQL("Select * from employee")
-    checkDatabase(rs.next(), rs, username, password)
+    checkDatabase(rs.next(), rs, user.getText, pass.getText)
   }
 
   def checkDatabase(check: Boolean, rs: ResultSet, usr: String, ps: String) {

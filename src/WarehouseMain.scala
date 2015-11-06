@@ -25,11 +25,11 @@ class WarehouseMain extends Application {
 
   override def start(Stage: Stage) {
     Stage setTitle("Warehouse Tracking App")
-    val root = new BorderPane()  
-    root.setRight( new LoginPane() createLoginPane())
+    val root = new BorderPane() 
     //root.setCenter(arg0)
     Stage setScene(new Scene(root, 300, 300))
     Stage show()
+    new LoginPane("Login window")
   }
 }
 

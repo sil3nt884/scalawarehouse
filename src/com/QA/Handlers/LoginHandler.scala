@@ -34,12 +34,16 @@ class LoginHandler(user : TextField ,  pass :TextField ) extends ActionHander {
     if (check) {
       val user = rs.getString(4)
       val pass = rs.getString(5)
+      
       if (user.equalsIgnoreCase(usr) && pass.equalsIgnoreCase(ps)) {
-            System.out.println("power!!!")
+            println("power!!!")
       }
       else{
-        checkDatabase(rs.next() , rs, usr, ps )
+      checkDatabase(rs.next() , rs, usr, ps )
       }
+    }
+    else {
+       System.err.println("failed to login try again")
     }
   }
 }

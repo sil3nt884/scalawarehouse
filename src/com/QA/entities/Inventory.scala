@@ -3,6 +3,8 @@ package com.QA.entities
 /**
  * @author rluu
  */
-class Inventory {
+class Inventory (productid : Integer,  employeeid : Integer ,  quantity : Integer , location : String ) {
+  
+ 
   
 }

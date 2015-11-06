@@ -16,13 +16,13 @@ class ActionHander extends EventHandler[ActionEvent] with MongoRunner with SQLRu
      event.getSource match{
        case button : Button =>
            if(button.getText.equalsIgnoreCase("Login")){
-               new Thread(new MethodThread(doLogin)).start()
+               new MethodThread(doLogin).start()
            }
        case _ =>
      }
    } 
   def doLogin () {
-     System.out.println("it works") 
+
   }
   
 }

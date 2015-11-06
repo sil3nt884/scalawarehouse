@@ -20,12 +20,12 @@ class DataConfig {
         dataSource.setDatabaseName("mydb");
         dataSource.setUser("root");
         dataSource.setPassword("root");
-        dataSource.setServerName("localhost");
+        dataSource.setServerName("10.50.15.3");
         dataSource
  }
  
  def MongoClient() :MongoClient ={
-   new MongoClient("localhost");
+   new MongoClient("10.50.15.3");
  }
  
  

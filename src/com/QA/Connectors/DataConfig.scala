@@ -15,6 +15,12 @@ import com.mongodb.MongoClient
 
 class DataConfig {
   
+  /**
+   * Sets up the connection to the SQL database
+   * 
+   * @returns DataSource
+   */
+  
  def  dataSource():  DataSource ={
       val dataSource  = new MysqlDataSource() 
         dataSource.setDatabaseName("mydb");
@@ -23,6 +29,10 @@ class DataConfig {
         dataSource.setServerName("10.50.15.3");
         dataSource
  }
+ 
+ /**
+  * Connects to a Mongo database
+  */
  
  def MongoClient() :MongoClient ={
    new MongoClient("10.50.15.3");

@@ -27,6 +27,7 @@ class WarehouseMain extends Application {
     Stage setTitle("Warehouse Tracking App")
     val root = new BorderPane()  
     root.setRight( new LoginPane() createLoginPane())
+    //root.setCenter(arg0)
     Stage setScene(new Scene(root, 300, 300))
     Stage show()
   }

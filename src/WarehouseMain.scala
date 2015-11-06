@@ -17,6 +17,7 @@ import javafx.scene.control._
 import com.QA.util.ActionHander
 import javafx.scene.paint.Color
 import com.QA.panefx.LoginPane
+import com.QA.panefx.InventoryPane
 
 /**
  * @author rluu
@@ -26,7 +27,7 @@ class WarehouseMain extends Application {
   override def start(Stage: Stage) {
     Stage setTitle("Warehouse Tracking App")
     val root = new BorderPane() 
-    //root.setCenter(arg0)
+    root.setCenter(new InventoryPane().createTable())
     Stage setScene(new Scene(root, 300, 300))
     Stage show()
     new LoginPane("Login window")

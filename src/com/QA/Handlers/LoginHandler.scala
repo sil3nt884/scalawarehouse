@@ -4,11 +4,17 @@ import java.sql.ResultSet
 import javafx.scene.control._
 import javafx.event._
 import com.QA.util.MethodThread
+import javafx.scene.control.Alert.AlertType
+import javax.swing.JOptionPane;
+
 
 /**
  * @author rluu
  */
 class LoginHandler(user : TextField ,  pass :TextField ) extends ActionHander {
+val  alert = new Alert(AlertType.INFORMATION);
+
+  
   
  def handle(event: ActionEvent) {
     event.getSource match {
@@ -31,14 +37,14 @@ class LoginHandler(user : TextField ,  pass :TextField ) extends ActionHander {
       val pass = rs.getString(5)
       
       if (user.equalsIgnoreCase(usr) && pass.equalsIgnoreCase(ps)) {
-            println("power!!!")
+          JOptionPane.showMessageDialog(null, "Welcome")  
       }
       else{
       checkDatabase(rs.next() , rs, usr, ps )
       }
     }
     else {
-       System.err.println("failed to login try again")
+        JOptionPane.showMessageDialog(null, "Failed to Log in") 
     }
   }
 }

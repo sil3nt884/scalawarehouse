@@ -28,7 +28,11 @@ class LoginPane  {
     root.setCenter(createLoginPane)
     stage.setScene(new Scene(root, 250, 160))
     stage.show()
+     
   }
+  
+ 
+  
   def createLoginPane() = {
     val box = new VBox()
     box.setPadding(new Insets(10));

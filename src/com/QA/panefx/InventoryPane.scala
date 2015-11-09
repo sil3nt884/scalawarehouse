@@ -3,29 +3,76 @@ import javafx.scene.control.TableView
 import javafx.scene.control._
 import javafx.scene.layout.VBox
 import javafx.geometry.Insets
+import com.QA.util.MethodThread
+import com.QA.runner.SQLRunner
+import java.sql.ResultSet
+import com.QA.util.ArrayList
+import com.QA.entities.Inventory
+import javafx.collections.FXCollections
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.cell.PropertyValueFactory
+import com.QA.Handlers.InventoryHandler
 
 /**
  * @author rluu
  */
 
-class InventoryPane  extends  VBox {
-
+class InventoryPane extends VBox {
+  val list = new ArrayList()
+  val loadThread = new MethodThread(load)
+  loadThread.start()
+  loadThread.stopThread()
   
   createTable()
-  
+
   def createTable() {
+    val data = FXCollections.observableArrayList[Inventory]()
+    val arraylist = list.toJavaArrayList()
+
+    for (i <- 0 until arraylist.size()) {
+      arraylist.get(i) match {
+        case line: Inventory =>
+          data.add(line)
+        case _ =>
+      }
+    }
+
     val vbox = new VBox()
-    val table = new TableView()
+    val table = new TableView[Inventory]()
     val label = new Label("Inventory")
-    val productid = new TableColumn("Product ID")
-    val employeeid = new TableColumn("Employee ID")
-    val qauntity = new TableColumn("Qauntity ID")
-    val location = new TableColumn("Location")
-    table.getColumns.addAll(productid,employeeid,qauntity,location)
+    val add = new Button("Add")
+    add.setOnAction(new InventoryHandler())
+    val productid = new TableColumn[Inventory, String]("Product ID")
+    productid.setCellValueFactory(new PropertyValueFactory[Inventory, String]("ProductID"))
+    val employeeid = new TableColumn[Inventory, String]("Employee ID")
+    employeeid.setCellValueFactory(new PropertyValueFactory[Inventory, String]("EmployeeID"))
+    val qauntity = new TableColumn[Inventory, String]("Qauntity ID")
+    qauntity.setCellValueFactory(new PropertyValueFactory[Inventory, String]("Quantity"))
+    val location = new TableColumn[Inventory, String]("Location")
+    location.setCellValueFactory(new PropertyValueFactory[Inventory, String]("Location"))
+    table.setItems(data)
+    table.getColumns.addAll(productid, employeeid, qauntity, location)
     setSpacing(5)
     setPadding(new Insets(10, 0, 0, 10));
-    getChildren().addAll(label, table);
-   
+    getChildren().addAll(label, table, add);
+
   }
   
+  
+
+  def load() {
+    val runner = new SQLRunner() {
+      val result = findAllSQL("Select * from inventory")
+      checkDatabase(result.next(), result)
+      def checkDatabase(check: Boolean, rs: ResultSet) {
+        if (check) {
+          list.add(new Inventory(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4))
+          )
+          checkDatabase(rs.next(), rs)
+        }
+      }
+    }
+
+  }
+
 }

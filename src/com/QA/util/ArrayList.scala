@@ -8,8 +8,8 @@ import java.lang.RuntimeException
  *
  *
  */
-class ArrayList {
-  var data = new Array[Any](100)
+class ArrayList{
+  var data = new Array[Object](100)
   var capacity = new Integer(100)
   var num = new Integer(0)
 
@@ -17,10 +17,19 @@ class ArrayList {
    * Gets the size of the list
    */
 
-  def size(): Integer = {
-    num
+ def  size():  Int = {
+     num
   }
 
+  def toJavaArrayList()  ={
+    val list = new java.util.ArrayList [Object]()
+    for(i <- 0 until num){
+      list.add(get(i))
+    }
+    list
+  }
+  
+  
   /**
    * Returns the element at the specified position in this list.
    *
@@ -28,7 +37,7 @@ class ArrayList {
    * @throws index out of bounds
    */
 
-  def get(i: Integer): Any = {
+  def get(i: Integer): Object = {
     if (i < 0 || i > num) {
       throw new RuntimeException("index out of bounds")
     }
@@ -42,10 +51,10 @@ class ArrayList {
    * size
    */
 
-  def add(obj: Any) {
+  def add(obj: Object) {
     if (num == capacity) {
       capacity = new Integer(capacity.+(10))
-      var datanew = new Array[Any](capacity)
+      var datanew = new Array[Object](capacity)
       for (i <- 0 until num) {
         datanew(i) = data(i)
       }

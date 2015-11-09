@@ -8,7 +8,7 @@ import java.lang.RuntimeException
  *
  *
  */
-class ArrayList{
+class ArrayList extends Seq[Any]{
   var data = new Array[Object](100)
   var capacity = new Integer(100)
   var num = new Integer(0)
@@ -16,8 +16,19 @@ class ArrayList{
   /**
    * Gets the size of the list
    */
+  
+  def length () :  Int = {
+     num
+  }
 
- def  size():  Int = {
+  def apply (idx : Int) : Any ={
+    
+  }
+  def  iterator () : Iterator [Any] ={
+    Iterator[Any](10)
+  }
+  
+ override def  size():  Int = {
      num
   }
 

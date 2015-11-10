@@ -18,6 +18,10 @@ import com.QA.util.ActionHander
 import javafx.scene.paint.Color
 import com.QA.panefx.LoginPane
 import com.QA.panefx.InventoryPane
+import com.QA.panefx.TabPanefx
+import java.util.logging.Logger
+import java.util.logging.Level
+
 
 /**
  * @author rluu
@@ -27,7 +31,7 @@ class WarehouseMain extends Application {
   override def start(Stage: Stage) {
     Stage setTitle("Warehouse Tracking App")
     val root = new BorderPane() 
-    root.setCenter(new InventoryPane())
+    root.setCenter(new TabPanefx())
     Stage setScene(new Scene(root, 300, 300))
     Stage show()
     new LoginPane("Login window")
@@ -38,6 +42,8 @@ class WarehouseMain extends Application {
 
 object WarehouseMain extends App {
   override def main(args: Array[String]) {
+    val logger = Logger.getLogger("com.mongodb")
+    logger.setLevel(Level.SEVERE)
     Application launch(classOf[WarehouseMain], args: _*)
 
   }

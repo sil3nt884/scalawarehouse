@@ -20,7 +20,7 @@ import javafx.beans.value.ObservableValue
  * @author rluu
  */
 
-class InventoryPane extends VBox  {
+class InventoryPane (tab : TabPane) extends VBox  {
   val list = new ArrayList()
   val loadThread = new MethodThread(load)
   loadThread.start()
@@ -51,7 +51,7 @@ class InventoryPane extends VBox  {
     val table = new TableView[Inventory]()
     val label = new Label("Inventory")
     val add = new Button("Add Product")
-    val handle = new InventoryHandler()
+    val handle = new InventoryHandler(tab)
     add.setOnAction(handle)
     val productid = new TableColumn[Inventory, String]("Product ID")
     productid.setCellValueFactory(new PropertyValueFactory[Inventory, String]("ProductID"))

@@ -12,10 +12,11 @@ import org.bson.Document
 import com.QA.util.Session
 import com.QA.panefx.InventoryPane
 
+
 /**
  * @author rluu
  */
-class InventoryHandler() extends ActionHander {
+class InventoryHandler(tab: TabPane ) extends ActionHander {
 
   val productdata = FXCollections.observableArrayList[Int]()
   val productlist = findAll(new Product())
@@ -100,8 +101,13 @@ class InventoryHandler() extends ActionHander {
 
   def addProduct(product: Product, quantity: String, location: String) {
     if (location.length() <= 2) {
-      insertSQL("Insert into Inventory values(" + product.getID() + "," + Session.getSession() + "," + quantity + "," + location + ");")
-        new InventoryPane()
+      insertSQL("Insert into Inventory values(" + product.getID() + "," + Session.getSession() + "," + quantity + "," + "'"+location+"'" + ");")
+       tab.getTabs.remove(0)
+       val tabs = new Tab ("Inventory")
+       tabs.setContent( new InventoryPane(tab))
+       tabs.setClosable(false)
+       tab.getTabs.add(0, tabs)
+       
     } else {
       System.err.println("invliad location")
     }

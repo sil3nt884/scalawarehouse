@@ -1,5 +1,6 @@
 package com.QA.util
 import java.lang.RuntimeException
+import scala.collection.mutable.Seq
 
 /**
  * @author Ricky Luu
@@ -12,6 +13,7 @@ class ArrayList extends Seq[Any]{
   var data = new Array[Object](100)
   var capacity = new Integer(100)
   var num = new Integer(0)
+ 
 
   /**
    * Gets the size of the list
@@ -31,6 +33,13 @@ class ArrayList extends Seq[Any]{
  override def  size():  Int = {
      num
   }
+ 
+ def update(idx : Int, elem: Any ){
+   
+ }
+ 
+
+ 
 
   def toJavaArrayList()  ={
     val list = new java.util.ArrayList [Object]()

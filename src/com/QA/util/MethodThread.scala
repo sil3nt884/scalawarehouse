@@ -9,9 +9,11 @@ class MethodThread (callback: () => Unit )extends Thread{
  
     
   override def run(){
-    
      callback ()
   }
+  
+  
+  
   
    def stopThread (){
     this.join()

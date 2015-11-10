@@ -37,9 +37,15 @@ class LoginPane  {
     val box = new VBox()
     box.setPadding(new Insets(10));
     box.setSpacing(8)
-    login.setOnAction(new LoginHandler(username,password))
+     val handle =new LoginHandler(username,password) 
+     login.setOnAction(handle)
+     
     box.getChildren.addAll(userlb, username, passlb, password,login)
     box
   }
+  
+  
+ 
+  
   
 }

@@ -12,20 +12,30 @@ import javafx.collections.FXCollections
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.cell.PropertyValueFactory
 import com.QA.Handlers.InventoryHandler
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue
+
 
 /**
  * @author rluu
  */
 
-class InventoryPane extends VBox {
+class InventoryPane extends VBox  {
   val list = new ArrayList()
   val loadThread = new MethodThread(load)
   loadThread.start()
   loadThread.stopThread()
   
   createTable()
+  
+  /**
+   * Creates and populates the table with 
+   * data
+   */
+  
 
   def createTable() {
+    
     val data = FXCollections.observableArrayList[Inventory]()
     val arraylist = list.toJavaArrayList()
 
@@ -40,8 +50,9 @@ class InventoryPane extends VBox {
     val vbox = new VBox()
     val table = new TableView[Inventory]()
     val label = new Label("Inventory")
-    val add = new Button("Add")
-    add.setOnAction(new InventoryHandler())
+    val add = new Button("Add Product")
+    val handle = new InventoryHandler()
+    add.setOnAction(handle)
     val productid = new TableColumn[Inventory, String]("Product ID")
     productid.setCellValueFactory(new PropertyValueFactory[Inventory, String]("ProductID"))
     val employeeid = new TableColumn[Inventory, String]("Employee ID")
@@ -59,7 +70,10 @@ class InventoryPane extends VBox {
   }
   
   
-
+  /**
+   * Loads from the database
+   */
+  
   def load() {
     val runner = new SQLRunner() {
       val result = findAllSQL("Select * from inventory")

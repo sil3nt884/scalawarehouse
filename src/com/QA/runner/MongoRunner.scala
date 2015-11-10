@@ -27,7 +27,6 @@ trait MongoRunner extends Mongoimpl {
     val test = mongo.getCollection(obj.getClass().getSimpleName).find()
     test.forEach(new Block[Document]() {
       override def apply(document: Document) {
-        println(document)
         list.add(document)
       }
     })

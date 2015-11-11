@@ -27,15 +27,15 @@ class CustomerOrderPane extends VBox {
   def createDialog(){
       val vbox = new VBox()
     val table = new TableView[CustomerOrder]()
-    val productid = new TableColumn[CustomerOrder, String]("Product ID")
-    productid.setCellValueFactory(new PropertyValueFactory[CustomerOrder, String]("OrderID"))
-    val employeeid = new TableColumn[CustomerOrder, String]("Employee ID")
-    employeeid.setCellValueFactory(new PropertyValueFactory[CustomerOrder, String]("Date"))
+    val orderid = new TableColumn[CustomerOrder, String]("Product ID")
+    orderid.setCellValueFactory(new PropertyValueFactory[CustomerOrder, String]("OrderID"))
+    val date = new TableColumn[CustomerOrder, String]("Employee ID")
+    date.setCellValueFactory(new PropertyValueFactory[CustomerOrder, String]("Date"))
     val qauntity = new TableColumn[CustomerOrder, String]("Qauntity ID")
     qauntity.setCellValueFactory(new PropertyValueFactory[CustomerOrder, String]("Quantity"))
-    val location = new TableColumn[CustomerOrder, String]("Location")
-    location.setCellValueFactory(new PropertyValueFactory[CustomerOrder, String]("Location"))
-    table.getColumns.addAll(productid, employeeid, qauntity, location)
+    val status = new TableColumn[CustomerOrder, String]("Location")
+    status.setCellValueFactory(new PropertyValueFactory[CustomerOrder, String]("Status"))
+    table.getColumns.addAll(orderid, date, qauntity, status)
     setSpacing(5)
     setPadding(new Insets(10, 0, 0, 10));
     getChildren().addAll(table);

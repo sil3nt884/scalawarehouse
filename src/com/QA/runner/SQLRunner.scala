@@ -15,7 +15,9 @@ trait SQLRunner extends SQLImpl {
      this.statement.createStatement().execute(statement)
   }
   def updateSQL(statement : String){
+    println(statement)
      this.statement.createStatement().executeUpdate(statement)
+     
   }
   def deleteSQL(statement : String){
     this.statement.createStatement().executeUpdate(statement)

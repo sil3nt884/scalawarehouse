@@ -16,7 +16,7 @@ class TabPanefx  extends BorderPane {
     val tabPane = new TabPane();  
     val tabIvent = new Tab("Inventory")
     val tabCustomer = new Tab("Customer Order")
-    tabCustomer.setContent(new CustomerOrderPane())
+    tabCustomer.setContent(new CustomerOrderPane(tabPane))
     tabCustomer.setClosable(false)
     tabIvent.setContent(new InventoryPane(tabPane))
     tabIvent.setClosable(false)

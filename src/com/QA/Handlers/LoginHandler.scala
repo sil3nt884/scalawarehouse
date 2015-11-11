@@ -47,8 +47,9 @@ class LoginHandler(user : TextField ,  pass :TextField ) extends ActionHander {
     if (check) {
       val user = rs.getString(4)
       val pass = rs.getString(5)
+      val id = rs.getInt(1)
       
-      if (user.equalsIgnoreCase(usr) && pass.equalsIgnoreCase(ps)) {
+      if (user.equalsIgnoreCase(usr) && pass.equalsIgnoreCase(ps) && id != 1) {
           Session.setSession(rs.getInt(1))
           JOptionPane.showMessageDialog(null, "Welcome")  
           

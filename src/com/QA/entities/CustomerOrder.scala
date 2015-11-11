@@ -2,15 +2,24 @@ package com.QA.entities
 import java.util.Date
 import javafx.beans.property.SimpleStringProperty;
 
-class CustomerOrder(customerid : Integer, ID: Integer, productID: Integer, date: String, quantity: Integer, status: Integer) {
+class CustomerOrder(customerid : Integer, Employeeid : Integer, ID: Integer, productID: Integer, date: String, quantity: Integer, status: Integer) {
   
   val CustomerID = new SimpleStringProperty(customerid.toString())
+  val EmployeeID = new SimpleStringProperty(Employeeid.toString())
   val OrderID = new SimpleStringProperty(ID.toString())
   val ProductID = new SimpleStringProperty(productID.toString())
   val Date = new SimpleStringProperty(date.toString())
   val Quantity = new SimpleStringProperty(quantity.toString())
   val Status = new SimpleStringProperty(status.toString())
 
+  def setEmployeeID(id : String){
+    EmployeeID.set(id)
+  }
+  
+  def getEmployeeID() : String ={
+    EmployeeID.get()
+  }
+  
   def setCustomerID(id: String){
     CustomerID.set(id)
   }
@@ -60,5 +69,9 @@ class CustomerOrder(customerid : Integer, ID: Integer, productID: Integer, date:
   def getStatus: String = {
     Status.get()
   }
+  
+ override def toString() : String ={
+   "Customer Order ID :"+customerid+","+" Order ID"+ID+","+"Product ID "+productID+","+"Date "+date+","+"Quantity :"+quantity+","+"status "+status
+ }
 
 }

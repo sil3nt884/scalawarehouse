@@ -10,27 +10,30 @@ import javax.swing.JOptionPane;
 import javafx.stage._
 import javafx.scene._
 import javafx.scene.layout.BorderPane
+import javafx.scene.layout.VBox
+import com.QA.runner.MongoRunner
+import com.QA.entities.Product
+import org.bson.Document
 
 /**
  * @author rluu
  */
-class CustomerOrderHandler(tab: TabPane, table: TableView[CustomerOrder]) extends EventHandler[MouseEvent] with SQLRunner {
+class CustomerOrderHandler(tab: TabPane, table: TableView[CustomerOrder]) extends EventHandler[MouseEvent] with SQLRunner with MongoRunner {
 
   def handle(mouse: MouseEvent) {
     if (mouse.getClickCount == 2) {
       val item = table.getSelectionModel.getSelectedItem
       println(item.getEmployeeID())
-      if (item.getEmployeeID.equals("1") && Session.getSession()!=0 && item.getStatus.equals("1")) {
+      if (item.getEmployeeID.equals("1") && Session.getSession() != 0 && item.getStatus.equals("1")) {
         println("updated item")
-        updateDatabase("Update customerorder  set Status=2, EmplyoeeID=" + Session.getSession() + " Where CustomerID=" + item.getCustomerID)
-        createDialog()
+        updateDatabase("Update customerorder , orders set Status=2, EmplyoeeID=" + Session.getSession() + " Where (CustomerID=" + item.getCustomerID + " and orders.ProductID=" + item.getProductID + " and Date='" + item.getDate + "');")
+        createDialog(item)
         tab.getTabs.remove(1)
         val tabs = new Tab("Customer Order")
         tabs.setContent(new CustomerOrderPane(tab))
         tabs.setClosable(false)
         tab.getTabs.add(1, tabs)
-      }
-      else {
+      } else {
         JOptionPane.showMessageDialog(null, "Order Already Claimed")
       }
 
@@ -38,10 +41,30 @@ class CustomerOrderHandler(tab: TabPane, table: TableView[CustomerOrder]) extend
 
   }
 
-  def createDialog() {
+  def createDialog(item: CustomerOrder) {
     val dailog = new Stage()
     val root = new BorderPane()
+    val box = new VBox()
+    val orderIDlb = new Label("OrderID: " + item.getOrderID())
+    val customerIDlb = new Label("CustomerID " + item.getCustomerID)
+    var name: String = ""
 
+    val list = this.findAll(new Product())
+    for (i <- 0 until list.size()) {
+      list.get(i) match {
+        case line: Document =>
+          val id = line.getInteger("ID")
+          if (item.getProductID.equals(id + "")) {
+            name = line.getString("Name")
+          }
+      }
+    }
+    val productlb = new Label("Product : " + name)
+    val quanity = new Label("Quanity : " + item.getQuantity())
+    val checkOut = new Button("CheckOut")
+    checkOut.setOnAction(new CheckoutHandler(Integer.parseInt(item.getProductID),item,tab))
+    box.getChildren.addAll(orderIDlb, customerIDlb, productlb, quanity, checkOut)
+    root.setCenter(box)
     dailog.setScene(new Scene(root, 200, 200))
     dailog.show()
   }

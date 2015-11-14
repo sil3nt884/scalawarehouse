@@ -6,7 +6,7 @@ package com.QA.entities
 /**
  * @author rluu
  */
-class Product(id: Integer , name : String , price : Integer) extends Entity {
+class Product(id: Integer , name : String , price : Integer) {
   
 
   

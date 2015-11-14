@@ -4,12 +4,17 @@ import javafx.beans.property.SimpleStringProperty;
 /**
  * @author rluu
  */
-class Inventory (productID : Int,  employeeID : Int ,  quantity : Int , location : String ) {
+class Inventory (productID : Int,  employeeID : Int ,  quantity : Int , location : String , size : Integer) {
   
   val ProductID = new SimpleStringProperty(productID.toString())
   val EmployeeID = new SimpleStringProperty(employeeID.toString())
   val Quantity = new SimpleStringProperty(quantity.toString())
   val Location = new SimpleStringProperty(location)
+  
+  
+  def getSize()={
+    size
+  }
   
   
    def setProductID(id: String){

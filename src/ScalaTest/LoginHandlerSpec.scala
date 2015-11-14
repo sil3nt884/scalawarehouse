@@ -15,7 +15,7 @@ import com.QA.runner.SQLRunner
 /**
  * @author rluu
  */
-class LoginHandlerSpec extends FlatSpec with SQLRunner {
+class LoginHandlerSpec extends UnitSpec with SQLRunner {
   
 
   "An valid login" should "give allow an employee to login in" in{

@@ -4,7 +4,7 @@ import com.QA.runner.SQLRunner
 /**
  * @author rluu
  */
-class CheckOutHandlerSpec extends FlatSpec with SQLRunner {
+class CheckOutHandlerSpec extends UnitSpec with SQLRunner {
   
   
   "Checks if an update can be made to the database this" should "update on success" in {

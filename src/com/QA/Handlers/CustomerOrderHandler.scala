@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox
 import com.QA.runner.MongoRunner
 import com.QA.entities.Product
 import org.bson.Document
+import com.QA.util.ArrayList
 
 /**
  * @author rluu
@@ -40,25 +41,37 @@ class CustomerOrderHandler(tab: TabPane, table: TableView[CustomerOrder]) extend
     }
 
   }
+  /**
+   * Creats a dailog showing the
+   * current product selected
+   */
 
   def createDialog(item: CustomerOrder) {
     val dailog = new Stage()
-    val root = new BorderPane()
+    val root = new BorderPane()  
     val box = new VBox()
     val orderIDlb = new Label("OrderID: " + item.getOrderID())
     val customerIDlb = new Label("CustomerID " + item.getCustomerID)
     var name: String = ""
 
     val list = this.findAll(new Product())
-    for (i <- 0 until list.size()) {
-      list.get(i) match {
-        case line: Document =>
+    
+    listLenght(0,list)
+    
+    def listLenght (i : Integer ,list : ArrayList)  {
+      if(i < list.size()){
+        list.get(i)match {
+          case line: Document =>
           val id = line.getInteger("ID")
           if (item.getProductID.equals(id + "")) {
             name = line.getString("Name")
           }
+        }   
+        listLenght(i.+(1) , list)
       }
     }
+
+    
     val productlb = new Label("Product : " + name)
     val quanity = new Label("Quanity : " + item.getQuantity())
     val checkOut = new Button("CheckOut")

@@ -75,8 +75,13 @@ class ArrayList extends Seq[Any]{
     if (num == capacity) {
       capacity = new Integer(capacity.+(10))
       var datanew = new Array[Object](capacity)
-      for (i <- 0 until num) {
-        datanew(i) = data(i)
+      loop(0,num)
+      def loop ( start: Int, num : Int){
+        if(start < num){
+          
+          datanew(start) = data(start)
+          loop(start.+(1),num)
+        }
       }
       data = datanew
     }

@@ -1,6 +1,5 @@
 package com.QA.panefx
 import javafx.scene.control.TableView
-import javafx.scene.control._
 import javafx.scene.layout.VBox
 import javafx.geometry.Insets
 import com.QA.util.MethodThread
@@ -44,14 +43,21 @@ class CustomerOrderPane(tab: TabPane) extends VBox with SQLRunner{
   def createTable() {
     val data = FXCollections.observableArrayList[CustomerOrder]()
     val arraylist = list.toJavaArrayList()
-
-    for (i <- 0 until arraylist.size()) {
-      arraylist.get(i) match {
+    
+    listLenght(0,list)
+    def listLenght(i: Integer, list: ArrayList) {
+    if (i < list.size()) {
+    list.get(i) match {
         case line: CustomerOrder =>
           data.add(line)
         case _ =>
       }
+    
+      listLenght(i.+(1), list)
     }
+  }
+    
+
 
     val vbox = new VBox()
     val table = new TableView[CustomerOrder]()

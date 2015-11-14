@@ -11,23 +11,29 @@ import javafx.scene.layout.VBox
 import org.bson.Document
 import com.QA.util.Session
 import com.QA.panefx.InventoryPane
-
+import com.QA.util.ArrayList
 
 /**
  * @author rluu
  */
-class InventoryHandler(tab: TabPane ) extends ActionHander {
+class InventoryHandler(tab: TabPane) extends ActionHander {
 
   val productdata = FXCollections.observableArrayList[Int]()
   val productlist = findAll(new Product())
-  for (i <- 0 until productlist.size()) {
-    productlist.get(i) match {
-      case line: Document =>
-        productdata.add(line.getInteger("ID"))
-      case _ =>
-    }
+  listLenght(0,productlist)
+  def listLenght(i: Integer, list: ArrayList) {
+    if (i < list.size()) {
+      productlist.get(i) match {
+        case line: Document =>
+          productdata.add(line.getInteger("ID"))
+        case _ =>
+      }
 
+      listLenght(i.+(1), list)
+    }
   }
+
+  
   val stage = new Stage()
   val box = new VBox()
   val comblb = new Label("product id")
@@ -45,7 +51,7 @@ class InventoryHandler(tab: TabPane ) extends ActionHander {
   val location = new TextField()
   var id: Int = 0
   var price: Int = 0;
-  
+
   def handle(event: ActionEvent) {
     val list = findAll(new Product())
     event.getSource match {
@@ -54,16 +60,22 @@ class InventoryHandler(tab: TabPane ) extends ActionHander {
           createDialog()
         }
         if (data.getText.equalsIgnoreCase("Add")) {
-          println("adding")
-          if (id != 0) {
-            for (i <- 0 until list.size()) {
+
+          def listLenght(i: Integer, list: ArrayList) {
+            if (i < list.size()) {
               list.get(i) match {
                 case doc: Document =>
                   if (doc.getInteger("ID") == id) {
                     price = doc.getInteger("Price")
                   }
               }
+
+              listLenght(i.+(1), list)
             }
+          }
+          println("adding")
+          if (id != 0) {
+            listLenght(0, list)
             addProduct(new Product(id, name, price), quanity.getText, location.getText)
           }
 
@@ -72,17 +84,20 @@ class InventoryHandler(tab: TabPane ) extends ActionHander {
       case comboBox: ComboBox[Integer] =>
         val value = comboBox.getSelectionModel.getSelectedItem.intValue()
         id = value
-        println(id)
-        for (i <- 0 until list.size()) {
-          list.get(i) match {
-            case doc: Document =>
-              if (doc.getInteger("ID") == value) {
-                name = doc.getString("Name")
-                namelb.setText("Product name: " + name)
-              }
+        listLenght(0, list)
+
+        def listLenght(i: Integer, list: ArrayList) {
+          if (i < list.size()) {
+            list.get(i) match {
+              case doc: Document =>
+                if (doc.getInteger("ID") == value) {
+                  name = doc.getString("Name")
+                  namelb.setText("Product name: " + name)
+                }
+            }
+            listLenght(i.+(1), list)
           }
         }
-      case _ =>
 
     }
 
@@ -101,13 +116,13 @@ class InventoryHandler(tab: TabPane ) extends ActionHander {
 
   def addProduct(product: Product, quantity: String, location: String) {
     if (location.length() <= 2) {
-      insertSQL("Insert into Inventory values(" + product.getID() + "," + Session.getSession() + "," + quantity + "," + "'"+location+"'" + ");")
-       tab.getTabs.remove(0)
-       val tabs = new Tab ("Inventory")
-       tabs.setContent( new InventoryPane(tab))
-       tabs.setClosable(false)
-       tab.getTabs.add(0, tabs)
-       
+      insertSQL("Insert into Inventory values(" + product.getID() + "," + Session.getSession() + "," + quantity + "," + "'" + location + "'" + ");")
+      tab.getTabs.remove(0)
+      val tabs = new Tab("Inventory")
+      tabs.setContent(new InventoryPane(tab))
+      tabs.setClosable(false)
+      tab.getTabs.add(0, tabs)
+
     } else {
       System.err.println("invliad location")
     }

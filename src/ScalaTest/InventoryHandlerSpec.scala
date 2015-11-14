@@ -7,7 +7,7 @@ import com.QA.runner.SQLRunner
 /**
  * @author rluu
  */
-class InventoryHandlerSpec extends FlatSpec with SQLRunner {
+class InventoryHandlerSpec extends UnitSpec with SQLRunner {
   
   
   

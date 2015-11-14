@@ -38,14 +38,20 @@ class InventoryPane (tab : TabPane) extends VBox  {
     
     val data = FXCollections.observableArrayList[Inventory]()
     val arraylist = list.toJavaArrayList()
-
-    for (i <- 0 until arraylist.size()) {
-      arraylist.get(i) match {
+    
+    listLenght(0,list)
+    
+    def listLenght(i: Integer, list: ArrayList) {
+    if (i < list.size()) {
+    list.get(i) match {
         case line: Inventory =>
           data.add(line)
         case _ =>
       }
+    
+      listLenght(i.+(1), list)
     }
+  }
 
     val vbox = new VBox()
     val table = new TableView[Inventory]()

@@ -12,7 +12,7 @@ import com.mongodb.MongoTimeoutException
 /**
  * @author rluu
  */
-class DatabaseConnectionSpc extends FlatSpec {
+class DatabaseConnectionSpc extends UnitSpec {
   
   "A  SQL connection " should "return a false  on isClosed()" in {
     val connection : DataConfig = new DataConfig()

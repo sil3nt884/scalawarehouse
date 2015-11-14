@@ -3,19 +3,19 @@
 
 
 
-
+import scalafx.Includes._
 import javafx.application.Application
-import javafx.scene.Scene
-import javafx.scene.layout._
+import scalafx.scene.Scene
+import scalafx.scene.layout._
 import javafx.stage.Stage
 import com.QA.runner.MongoRunner
 import com.QA.entities.Product
 import com.QA.util.ArrayList
 import com.QA.entities.Product
 import com.QA.Connectors.DataConfig
-import javafx.scene.control._
+import scalafx.scene.control._
 import com.QA.util.ActionHander
-import javafx.scene.paint.Color
+import scalafx.scene.paint.Color
 import com.QA.panefx.LoginPane
 import com.QA.panefx.InventoryPane
 import com.QA.panefx.TabPanefx
@@ -42,8 +42,6 @@ class WarehouseMain extends Application {
 
 object WarehouseMain extends App {
   override def main(args: Array[String]) {
-    val logger = Logger.getLogger("com.mongodb")
-    logger.setLevel(Level.SEVERE)
     Application launch(classOf[WarehouseMain], args: _*)
 
   }

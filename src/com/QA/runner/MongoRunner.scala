@@ -6,11 +6,9 @@ import com.QA.entities.Product
 import com.mongodb.Block
 import org.bson.Document
 import com.QA.util.ArrayList
-import com.QA.entities.Entity
 import scala.util.control.Breaks._
 import java.util.HashSet
 import java.util.HashMap
-import com.QA.entities.Entity
 
 
 /**
@@ -60,21 +58,21 @@ trait MongoRunner extends Mongoimpl {
   def update(id: Integer, obj: Any, feild: String, value : String) {
     val list = findAll(obj)
     var ids : Int = 0 
-    breakable {
-      for (i <- 0 until list.size()) {
-        list.get(i) match {
-          case data: Document =>
-            if (data.getInteger("ID") == id) {
+    checklist(list, 0, list.size())
+      def checklist (list : ArrayList, i : Int , size : Int){
+        list.get(i) match{
+          case data : Document =>
+           if (data.getInteger("ID") != id) {
+              checklist(list, i.+(1), size)
+           }
+           if(data.getInteger("ID") == id){
               ids = data.getInteger("ID")
-              break
-            }
-          case _ => 
+              mongo.getCollection(obj.getClass().getSimpleName).updateMany(new Document("ID", ids), new Document("$set", new Document(feild,value)))
+              println("updated");
+              
+           }
         }
-
-      }
-      
-    }
-    mongo.getCollection(obj.getClass().getSimpleName).updateMany(new Document("ID", ids), new Document("$set", new Document(feild,value)))
+      }  
   }
 
   def delete(id: Integer) {

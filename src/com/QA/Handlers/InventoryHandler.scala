@@ -107,6 +107,7 @@ class InventoryHandler(tab: TabPane) extends ActionHander {
    */
 
   def createDialog() {
+    update(1,new Product(), "Name" ,"Testproduct");
     box.getChildren.addAll(comblb, comboBox, quantitylb, quanity, namelb, locationlb, location, ok)
     root.getChildren.addAll(box)
     stage.setScene(new Scene(root, 200, 200))
@@ -116,7 +117,12 @@ class InventoryHandler(tab: TabPane) extends ActionHander {
 
   def addProduct(product: Product, quantity: String, location: String) {
     if (location.length() <= 2) {
-      insertSQL("Insert into Inventory values(" + product.getID() + "," + Session.getSession() + "," + quantity + "," + "'" + location + "'" + ");")
+      var size =0;
+      if(product.getID()==1){
+       size =10
+      }
+      insertSQL("Insert into Inventory values("+product.getID()+","+Session.getSession()+","+quantity+","+"'"+location+"'"+","+size+")")
+     
       tab.getTabs.remove(0)
       val tabs = new Tab("Inventory")
       tabs.setContent(new InventoryPane(tab))

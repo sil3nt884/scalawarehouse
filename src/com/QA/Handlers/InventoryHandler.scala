@@ -20,7 +20,7 @@ class InventoryHandler(tab: TabPane) extends ActionHander {
 
   val productdata = FXCollections.observableArrayList[Int]()
   val productlist = findAll(new Product())
-  listLenght(0,productlist)
+  listLenght(0, productlist)
   def listLenght(i: Integer, list: ArrayList) {
     if (i < list.size()) {
       productlist.get(i) match {
@@ -33,7 +33,6 @@ class InventoryHandler(tab: TabPane) extends ActionHander {
     }
   }
 
-  
   val stage = new Stage()
   val box = new VBox()
   val comblb = new Label("product id")
@@ -107,22 +106,26 @@ class InventoryHandler(tab: TabPane) extends ActionHander {
    */
 
   def createDialog() {
-    update(1,new Product(), "Name" ,"Testproduct");
+    update(1, new Product(), "Name", "Testproduct");
     box.getChildren.addAll(comblb, comboBox, quantitylb, quanity, namelb, locationlb, location, ok)
     root.getChildren.addAll(box)
     stage.setScene(new Scene(root, 200, 200))
     stage.show()
 
   }
+  
+  /**
+   * Adds a product to a the database
+   */
 
   def addProduct(product: Product, quantity: String, location: String) {
     if (location.length() <= 2) {
-      var size =0;
-      if(product.getID()==1){
-       size =10
+      var size = 0;
+      if (product.getID() == 1) {
+        size = 10
       }
-      insertSQL("Insert into Inventory values("+product.getID()+","+Session.getSession()+","+quantity+","+"'"+location+"'"+","+size+")")
-     
+      insertSQL("Insert into Inventory values(" + product.getID() + "," + Session.getSession() + "," + quantity + "," + "'" + location + "'" + "," + size + ")")
+
       tab.getTabs.remove(0)
       val tabs = new Tab("Inventory")
       tabs.setContent(new InventoryPane(tab))

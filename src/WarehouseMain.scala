@@ -41,6 +41,11 @@ class WarehouseMain extends Application with SQLRunner {
     new LoginPane("Login window")
   
   }
+  
+  /**
+   * Creates the database needed 
+   * to runthis program
+   */
 
   def createDatabases() : Boolean = {
    val mongo = new File("C:/data")

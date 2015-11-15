@@ -45,6 +45,10 @@ class CheckoutHandler (id: Integer, item : CustomerOrder, tab : TabPane) extends
     
   }
   
+  /**
+   * Checks if a picker thats needed
+   * 
+   */
   
   def checkPicker(start : Int,list : ArrayList) {
   
@@ -63,6 +67,10 @@ class CheckoutHandler (id: Integer, item : CustomerOrder, tab : TabPane) extends
     }
   
   }
+  
+  /**
+   * Runs a SQL statment
+   */
   
   
    def updateDatabase(statement: String) {
